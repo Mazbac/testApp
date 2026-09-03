@@ -1,14 +1,16 @@
 {
   "$schema": "./manifest.schema.json",
   "schemaVersion": 2,
-  "mode": "template",
-  "lifecycle": "TEMPLATE",
+  "mode": "project",
+  "lifecycle": "VERIFY",
   "project": {
-    "name": "UNSET",
-    "summary": "UNSET",
-    "appType": "UNSET",
-    "primaryUsers": [],
-    "firstRelease": "UNSET"
+    "name": "QuickShelf",
+    "summary": "A lightweight local Windows scratchpad for creating, finding, favoriting, backing up, and restoring short text notes.",
+    "appType": "Windows desktop application",
+    "primaryUsers": [
+      "Individual Windows users who want a fast local scratchpad"
+    ],
+    "firstRelease": "v0.1: local notes, search, favorites, autosave, theme setting, JSON import/export, reset, installer/uninstaller"
   },
   "context": {
     "invariant": "session-invariance",
@@ -21,48 +23,56 @@
       "PLAN.md",
       "DECISIONS.md",
       "RISKS.md",
-      "ARCHITECTURE.md"
+      "ARCHITECTURE.md",
+      "DESIGN_SYSTEM.md",
+      "docs/THREAT_MODEL.md"
     ]
   },
   "stack": {
-    "primary": "UNSET",
-    "runtime": "UNSET",
-    "packageManager": "UNSET",
-    "database": "UNSET"
+    "primary": "C# 14 / WPF",
+    "runtime": ".NET 10 LTS, self-contained win-x64 release",
+    "packageManager": "NuGet via dotnet CLI",
+    "database": "none; versioned local JSON"
   },
   "commands": {
-    "bootstrap": null,
-    "dev": null,
-    "format": null,
-    "lint": null,
-    "typecheck": null,
-    "unit": null,
-    "integration": null,
-    "e2e": null,
-    "build": null,
-    "verify": null
+    "bootstrap": "powershell -NoProfile -ExecutionPolicy Bypass -File tools/bootstrap.ps1",
+    "dev": "dotnet run --project src/QuickShelf/QuickShelf.csproj",
+    "format": "dotnet format QuickShelf.slnx --verify-no-changes --no-restore",
+    "lint": "dotnet build QuickShelf.slnx -c Release --no-restore -warnaserror",
+    "typecheck": "dotnet build QuickShelf.slnx -c Release --no-restore -warnaserror",
+    "unit": "dotnet test tests/QuickShelf.Tests/QuickShelf.Tests.csproj -c Release --no-build --filter TestCategory=Unit",
+    "integration": "dotnet test tests/QuickShelf.Tests/QuickShelf.Tests.csproj -c Release --no-build --filter TestCategory=Integration",
+    "e2e": "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/e2e.ps1",
+    "build": "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/build.ps1",
+    "verify": "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/verify.ps1"
   },
   "ui": {
-    "hasUserInterface": false,
-    "kind": "UNSET",
-    "platform": "UNSET",
+    "hasUserInterface": true,
+    "kind": "native-desktop",
+    "platform": "Windows 11 x64",
     "devUrl": null,
     "playwright": false,
-    "designSystem": null,
-    "designTokens": null,
-    "componentStrategy": "UNSET",
-    "accessibilityTarget": "UNSET",
-    "visualRegression": "UNSET"
+    "designSystem": "DESIGN_SYSTEM.md",
+    "designTokens": "src/QuickShelf/Styles/Tokens.xaml",
+    "componentStrategy": "Built-in WPF controls with product styles and narrow code-behind event handlers; domain/data behavior remains in testable services; no third-party UI framework in v0.1",
+    "accessibilityTarget": "Windows UI Automation plus WCAG 2.2 AA principles adapted to native desktop",
+    "visualRegression": "Representative release screenshots and semantic/UI Automation smoke checks; manual-by-ChatGPT maturity review"
   },
   "experience": {
-    "audience": "UNSET",
-    "installer": "UNSET",
-    "onboarding": "UNSET",
-    "updater": "UNSET",
-    "recovery": "UNSET",
-    "reset": "UNSET",
-    "uninstaller": "UNSET",
-    "goldenJourneys": []
+    "audience": "Non-technical individual Windows users",
+    "installer": "Per-user NSIS installer; no admin rights or separate runtime install",
+    "onboarding": "No wizard; first launch opens an empty workspace with one clear Create snippet action.",
+    "updater": "v0.1 supports reinstall-over-existing while preserving app data; no network auto-updater",
+    "recovery": "Atomic local writes; invalid/corrupt data is quarantined and the user receives a recoverable error; export provides manual backup",
+    "reset": "Settings includes Reset all data with explicit destructive confirmation",
+    "uninstaller": "Removes installed binaries and shortcuts while preserving user notes by default; reinstall restores them",
+    "goldenJourneys": [
+      "Fresh install -> launch -> create first note -> close -> reopen -> note remains",
+      "Create multiple notes -> favorite one -> search -> edit -> autosave -> clear search",
+      "Export notes -> reset all data -> import backup -> notes and favorites return",
+      "Switch System/Light/Dark theme -> restart -> selected preference remains",
+      "Uninstall -> reinstall -> preserved notes remain available"
+    ]
   },
   "quality": {
     "definitionOfDone": "docs/DEFINITION_OF_DONE.md",
@@ -74,8 +84,8 @@
     "requireContextIntegrity": true
   },
   "release": {
-    "artifact": "UNSET",
-    "deployment": "UNSET",
-    "rollback": "UNSET"
+    "artifact": "dist/QuickShelf-Setup-0.1.0.exe plus checksums/release notes",
+    "deployment": "GitHub Release asset after green independent CI and installed-artifact smoke tests",
+    "rollback": "Uninstall the current build and install the prior tested installer while preserving versioned local data; schema changes require a pre-migration backup."
   }
 }

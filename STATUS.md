@@ -1,31 +1,28 @@
 # Current State
 
-- Lifecycle: TEMPLATE
-- Foundation status: READY
-- Foundation v2 merge: `26951f5b25759ad96bcf5d6c789acf6aaff9badd`
-- Manifest schema: v2
-- Local validation on merged v2 foundation: GREEN
-- Independent PR validation for implementation PR #3: GREEN
-- Post-merge `main` GitHub Actions validation: GREEN
-- Local direct-default-branch guard: VERIFIED BLOCKING
+- Lifecycle: VERIFY
+- Product: QuickShelf v0.1.0
+- Platform: Windows 11 x64 desktop
+- Branch: `feat/quickshelf-v0.1`
+- Discovery/definition/design: COMPLETE
+- Build implementation: COMPLETE for v0.1 scope
+- Local aggregate verification: GREEN
+- Final local installer lifecycle: GREEN
+- Server-side `main` protection: ENABLED
 
-## Verified foundation
-- Session invariance is the primary continuity invariant; chat history is disposable project context.
-- Explicit source precedence/reconciliation, durable-input classification and decision supersession.
-- Stack-neutral manifest v2 with machine-readable context, UI/design, product-experience and release state.
-- Schema-driven repository validation plus a separate context-integrity gate.
-- Positive baseline and six adversarial negative canaries run locally and in GitHub Actions.
-- Secure SDLC, professional Product Experience Standard, professional design methodology, security standard, test strategy and hard Definition of Done.
-- UI projects require durable design-system/token sources, component strategy, accessibility target and golden journeys before lifecycle advancement.
-- Derived project CI must run repository validation and context integrity.
-- Local bootstrap/doctor checks Git, GitHub CLI, Node, npm, Playwright and versioned Git hooks.
-- Full-SHA GitHub Actions pinning remains enforced.
+## Verified evidence
+- Repository validation and context integrity pass in project mode.
+- Release build completes with 0 warnings and 0 errors; 8/8 unit/integration tests pass.
+- Security scan passes dependency-vulnerability and tracked-secret checks.
+- Semantic Windows UI Automation first-value/persistence E2E passes.
+- All five manifest golden journeys were exercised through the real product surface.
+- Dark and Light main/settings surfaces were visually inspected; encoding, locale and dark-settings contrast defects found during review were fixed and reverified.
+- Final installer `QuickShelf-Setup-0.1.0.exe` is self-contained; local SHA-256: `2c143cd8e069f91c5cd929db6565f1582c5ff0e1b3151498e9f1d108794a364a`.
+- Final installer lifecycle passed install -> use -> uninstall -> preserved data -> reinstall -> restored data -> uninstall, with pre-existing local state restored afterward.
+- GitHub `main` now requires PRs, `template-integrity` + `quality` checks, admin enforcement and conversation resolution; force-push/deletion are blocked.
 
-## Platform constraint
-GitHub server-side rulesets/classic branch protection remain unavailable for this private repository on the current plan. The versioned local pre-push guard remains defense-in-depth; PR + green CI is mandatory policy. Enable server-side protection if the plan/visibility later supports it.
-
-## Next use
-Create/use a repository from this template and give normal ChatGPT the new-project prompt in `START_HERE.md`. ChatGPT should reconstruct context deterministically, discover the product from natural language, activate project mode, establish project-specific design/experience/security/quality sources, and continue autonomously through the SDLC.
+## Current priority
+Move the verified v0.1 candidate through the protected implementation PR, obtain green independent GitHub Actions, review the exact diff/security/product maturity, then merge and rebuild/retest the exact release revision.
 
 ## Known blockers
-None for normal template use. Server-side branch enforcement remains a GitHub plan/visibility capability constraint, not a product-development blocker.
+No implementation blocker. v0.1 is unsigned because no code-signing identity is available; release notes must state the resulting Windows publisher/SmartScreen limitation rather than implying verified publisher trust.

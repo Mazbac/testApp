@@ -1,0 +1,8 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/QuickShelf/QuickShelf.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/QuickShelf.Tests/QuickShelf.Tests.csproj" />
+  </Folder>
+</Solution>

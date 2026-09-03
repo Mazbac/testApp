@@ -2,21 +2,19 @@
 
 | Risk | Impact | Required mitigation |
 |---|---|---|
-| Chat context loss | Work is repeated or assumptions drift | Repo-first deterministic resume procedure + current durable state |
-| Cross-chat semantic drift | Different sessions build different interpretations of the same product | Session-invariance contract, durable design/product sources, context-integrity tests |
-| Docs/machine/code divergence | New session trusts stale or contradictory state | Source precedence, reconciliation, manifest/schema/context-integrity gates |
-| Premature "done" claim | Broken or immature release reaches user | Hard Definition of Done + independent CI + professional experience review |
-| UI/design-direction drift | Product becomes visually inconsistent or changes personality across chats | Manifest-referenced design system, tokens, product component layer, visual regression/review |
-| Generic AI UI | Coherent but visibly less mature than professional reference products | Reference-class/platform research and explicit maturity review before release |
-| Component-library leakage/lock-in | Vendor styling/API defines product identity and makes replacement costly | Explicit component strategy; product abstractions over proven primitives where practical |
-| Consumer lifecycle regression | Install/setup/update/uninstall works technically but becomes confusing or fragile | Product Experience Standard + golden lifecycle journeys |
-| Security added late | Structural vulnerabilities | Threat model during DEFINE; security tests during every slice |
-| Tool-driven accidental change | Data/code loss | Branches, small reversible changes, backups/migrations, rollback |
-| Dependency/supply-chain compromise | Build/runtime compromise | Minimal dependencies, lockfiles, scanning, pinned CI actions |
-| Local-only success | Release fails on another machine | Clean-install/reproducible build test |
-| Over-automation via pixel clicking | Fragile tests/actions | API/CLI/semantic UI automation before coordinate input |
-| Scope creep | Endless project / fragile architecture | First useful release + explicit backlog + impact analysis |
-| User becomes relay operator | Slow/error-prone development | Exhaust ChatGPT-accessible tools before escalation |
-| Private repo lacks server-side branch protection on current GitHub plan | Direct main updates cannot be blocked by GitHub itself | Versioned local pre-push guard + PR/CI policy; enable server-side rules if later supported |
+| Chat/session loss | Product meaning or priority drifts | Repository-first resume sequence + current manifest/state/docs |
+| Local data corruption | User loses notes | Versioned schema, atomic temp-file replace, quarantine invalid data, export backup, tests |
+| Destructive reset/delete | Accidental data loss | Explicit confirmation naming consequence; no hidden destructive shortcuts |
+| Malicious/oversized import | Memory/resource abuse or invalid state | File-size cap, strict validation, bounded strings/items, no execution/evaluation |
+| UI design drift | App looks inconsistent across chats | `DESIGN_SYSTEM.md` + canonical XAML tokens + visual review |
+| Accessibility regression | Keyboard/screen-reader users cannot use app | Standard WPF controls, AutomationProperties, UI Automation journeys, focus/contrast review |
+| Installer requests elevation | Consumer-hostile/security regression | Per-user LocalAppData install; no admin rights; lifecycle test |
+| Uninstall deletes user notes unexpectedly | Irreversible user-data loss | Preserve note data by default; explicit in-app Reset owns deletion |
+| Runtime prerequisite leaks to user | Install fails on clean PC | Self-contained win-x64 publish; installed-artifact lifecycle test |
+| Dependency/supply-chain compromise | Build/release compromise | Minimal dependencies, lockfiles, pinned Actions, vulnerability/secret scans, verified tooling downloads |
+| Release artifact differs from tested revision | Unverified binary shipped | Build only after merge from exact clean revision; checksum and artifact smoke test |
+| Unsigned installer trust warning | Windows may show Unknown publisher/SmartScreen friction | State limitation clearly; never imply verified publisher; signing requires a future authorized identity |
+| Server-side branch rules are weakened/removed | Direct main change can bypass PR/CI policy | `main` protection currently requires PR + `template-integrity`/`quality`, enforces admins, blocks force-push/deletion; recheck during release |
+| Template/docs drift from live implementation | Replacement chat trusts stale assumptions | Source precedence + context-integrity validation + reconciliation before release |
 
-New material risks must be added when discovered and closed only with evidence.
+High/critical security findings, unexplained data-loss risk and failed required release gates block release.

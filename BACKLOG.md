@@ -1,20 +1,16 @@
-# Backlog
+# QuickShelf Backlog
 
-This file contains accepted ideas that are not part of the current vertical slice or release.
+Items accepted but outside v0.1.
 
-## Intake rule
-When the user introduces a new idea, first classify its durable meaning:
-- correction: accepted behavior/experience does not match intent;
-- feature: additive product capability;
-- architecture change: alters major boundaries/data/deployment/distribution;
-- design-system change: alters durable product design language/components/patterns;
-- product-experience change: alters setup, workflow, recovery or lifecycle behavior;
-- security issue: vulnerability or unsafe assumption;
-- research: decision requires current evidence first.
+## v0.2 template stress test
+- Add a deliberate state-schema v1 -> v2 migration (for example snippet color/category metadata).
+- Prove install-over upgrade preserves v0.1 data and creates a rollback-safe pre-migration backup.
+- Add migration regression tests and lifecycle evidence.
 
-Assess user value, release relevance, dependencies, migration risk, security impact, product-experience impact, design-system impact, test impact and context impact. Implement immediately only when it belongs in the current objective or blocks safe progress; otherwise record it here.
+## Deferred product ideas
+- Optional tags/categories beyond Favorite.
+- Keyboard command palette / global hotkey.
+- Portable distribution alongside installer.
 
-Durable user preferences still update the appropriate product/design source even when their implementation is deferred.
-
-## Items
-None yet.
+## Explicitly not planned without new product intent
+Accounts, cloud sync, collaboration, mobile/web clients, rich text, plugins/extensions and telemetry.

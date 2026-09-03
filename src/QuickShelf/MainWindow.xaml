@@ -1,0 +1,128 @@
+<Window x:Class="QuickShelf.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:automation="clr-namespace:System.Windows.Automation;assembly=PresentationCore"
+        Title="QuickShelf" Width="1040" Height="680" MinWidth="760" MinHeight="520"
+        WindowStartupLocation="CenterScreen" Loaded="MainWindow_Loaded"
+        Closing="MainWindow_Closing" PreviewKeyDown="MainWindow_PreviewKeyDown"
+        automation:AutomationProperties.Name="QuickShelf">
+  <Grid Background="{DynamicResource WindowBackgroundBrush}">
+    <Grid.RowDefinitions>
+      <RowDefinition Height="64" />
+      <RowDefinition Height="Auto" />
+      <RowDefinition Height="*" />
+    </Grid.RowDefinitions>
+
+    <Border Grid.Row="0" Background="{DynamicResource SurfaceBrush}" BorderBrush="{DynamicResource BorderBrush}" BorderThickness="0,0,0,1">
+      <Grid Margin="20,0">
+        <Grid.ColumnDefinitions><ColumnDefinition /><ColumnDefinition Width="Auto" /></Grid.ColumnDefinitions>
+        <StackPanel VerticalAlignment="Center">
+          <TextBlock Text="QuickShelf" FontSize="22" FontWeight="SemiBold" Foreground="{DynamicResource TextBrush}" />
+          <TextBlock Text="Your snippets stay on this PC" FontSize="12" Foreground="{DynamicResource MutedTextBrush}" />
+        </StackPanel>
+        <Button Grid.Column="1" Content="Settings" Click="SettingsButton_Click" VerticalAlignment="Center"
+                automation:AutomationProperties.Name="Open QuickShelf settings" />
+      </Grid>
+    </Border>
+
+    <Border x:Name="NoticeBorder" Grid.Row="1" Background="{DynamicResource SelectionBrush}" BorderBrush="{DynamicResource BorderBrush}"
+            BorderThickness="0,0,0,1" Padding="16,10" Visibility="Collapsed">
+      <DockPanel>
+        <Button DockPanel.Dock="Right" Content="Dismiss" Margin="12,0,0,0" Padding="8,4" Click="DismissNotice_Click" />
+        <TextBlock x:Name="NoticeText" TextWrapping="Wrap" VerticalAlignment="Center" Foreground="{DynamicResource TextBrush}" />
+      </DockPanel>
+    </Border>
+
+    <Grid Grid.Row="2">
+      <Grid.ColumnDefinitions><ColumnDefinition Width="310" /><ColumnDefinition Width="1" /><ColumnDefinition Width="*" /></Grid.ColumnDefinitions>
+      <Border Grid.Column="0" Background="{DynamicResource SurfaceBrush}" Padding="16">
+        <Grid>
+          <Grid.RowDefinitions><RowDefinition Height="Auto" /><RowDefinition Height="Auto" /><RowDefinition Height="Auto" /><RowDefinition Height="*" /></Grid.RowDefinitions>
+          <Grid Grid.Row="0" Margin="0,0,0,16">
+            <Grid.ColumnDefinitions><ColumnDefinition /><ColumnDefinition Width="Auto" /></Grid.ColumnDefinitions>
+            <Button Content="+ New snippet" Style="{StaticResource PrimaryButton}" Click="NewSnippet_Click" HorizontalAlignment="Left"
+                    automation:AutomationProperties.Name="Create new snippet" />
+            <TextBlock x:Name="SnippetCountText" Grid.Column="1" VerticalAlignment="Center" Foreground="{DynamicResource MutedTextBrush}" />
+          </Grid>
+          <TextBlock Grid.Row="1" Text="Search snippets" Margin="0,0,0,6" FontSize="12" Foreground="{DynamicResource MutedTextBrush}" />
+          <TextBox x:Name="SearchBox" Grid.Row="2" Margin="0,0,0,12" TextChanged="SearchBox_TextChanged"
+                   automation:AutomationProperties.Name="Search snippets" />
+          <ListBox x:Name="SnippetList" Grid.Row="3" SelectionChanged="SnippetList_SelectionChanged"
+                   automation:AutomationProperties.Name="Snippets">
+            <ListBox.ItemTemplate>
+              <DataTemplate>
+                <Grid>
+                  <Grid.RowDefinitions><RowDefinition Height="Auto" /><RowDefinition Height="Auto" /><RowDefinition Height="Auto" /></Grid.RowDefinitions>
+                  <Grid>
+                    <Grid.ColumnDefinitions><ColumnDefinition /><ColumnDefinition Width="Auto" /></Grid.ColumnDefinitions>
+                    <TextBlock Text="{Binding Title}" FontWeight="SemiBold" TextTrimming="CharacterEllipsis" Foreground="{DynamicResource TextBrush}" />
+                    <TextBlock Grid.Column="1" Text="★" Margin="8,0,0,0" Foreground="{DynamicResource AccentBrush}">
+                      <TextBlock.Style>
+                        <Style TargetType="TextBlock">
+                          <Setter Property="Visibility" Value="Collapsed" />
+                          <Style.Triggers><DataTrigger Binding="{Binding IsFavorite}" Value="True"><Setter Property="Visibility" Value="Visible" /></DataTrigger></Style.Triggers>
+                        </Style>
+                      </TextBlock.Style>
+                    </TextBlock>
+                  </Grid>
+                  <TextBlock Grid.Row="1" Text="{Binding Content}" Margin="0,5,0,0" Height="34" TextWrapping="Wrap"
+                             Foreground="{DynamicResource MutedTextBrush}" FontSize="12" />
+                  <TextBlock Grid.Row="2" Text="{Binding UpdatedAtUtc.LocalDateTime, StringFormat='{}{0:g}'}" Margin="0,5,0,0"
+                             Foreground="{DynamicResource MutedTextBrush}" FontSize="11" />
+                </Grid>
+              </DataTemplate>
+            </ListBox.ItemTemplate>
+          </ListBox>
+        </Grid>
+      </Border>
+
+      <Border Grid.Column="1" Background="{DynamicResource BorderBrush}" />
+
+      <Grid Grid.Column="2" Margin="28,24">
+        <StackPanel x:Name="EmptyState" HorizontalAlignment="Center" VerticalAlignment="Center" MaxWidth="420">
+          <TextBlock Text="A clear place for the little things" FontSize="24" FontWeight="SemiBold" TextAlignment="Center" Foreground="{DynamicResource TextBrush}" />
+          <TextBlock Text="Create your first snippet. QuickShelf saves automatically and keeps everything on this PC."
+                     Margin="0,10,0,20" TextWrapping="Wrap" TextAlignment="Center" Foreground="{DynamicResource MutedTextBrush}" />
+          <Button Content="Create first snippet" Style="{StaticResource PrimaryButton}" HorizontalAlignment="Center" Click="NewSnippet_Click" />
+        </StackPanel>
+
+        <Grid x:Name="EditorPanel" Visibility="Collapsed">
+          <Grid.RowDefinitions><RowDefinition Height="Auto" /><RowDefinition Height="Auto" /><RowDefinition Height="*" /><RowDefinition Height="Auto" /></Grid.RowDefinitions>
+          <Grid Grid.Row="0" Margin="0,0,0,16">
+            <Grid.ColumnDefinitions><ColumnDefinition /><ColumnDefinition Width="Auto" /></Grid.ColumnDefinitions>
+            <StackPanel>
+              <TextBlock Text="Snippet" FontSize="13" Foreground="{DynamicResource MutedTextBrush}" />
+              <TextBlock Text="Edit freely — changes save automatically" FontSize="12" Foreground="{DynamicResource MutedTextBrush}" />
+            </StackPanel>
+            <TextBlock x:Name="SaveStatusText" Grid.Column="1" VerticalAlignment="Center" Foreground="{DynamicResource MutedTextBrush}" Text="Saved" />
+          </Grid>
+          <Grid Grid.Row="1" Margin="0,0,0,14">
+            <Grid.ColumnDefinitions><ColumnDefinition /><ColumnDefinition Width="Auto" /></Grid.ColumnDefinitions>
+            <StackPanel>
+              <TextBlock Text="Title" Margin="0,0,0,6" FontSize="12" Foreground="{DynamicResource MutedTextBrush}" />
+              <TextBox x:Name="TitleBox" Text="{Binding Title, UpdateSourceTrigger=PropertyChanged}" MaxLength="200"
+                       FontSize="18" FontWeight="SemiBold" automation:AutomationProperties.Name="Snippet title" />
+            </StackPanel>
+            <Button x:Name="FavoriteButton" Grid.Column="1" Margin="12,20,0,0" VerticalAlignment="Top" Click="FavoriteButton_Click"
+                    automation:AutomationProperties.Name="Toggle favorite" />
+          </Grid>
+
+          <Grid Grid.Row="2">
+            <Grid.RowDefinitions><RowDefinition Height="Auto" /><RowDefinition Height="*" /></Grid.RowDefinitions>
+            <TextBlock Text="Content" Margin="0,0,0,6" FontSize="12" Foreground="{DynamicResource MutedTextBrush}" />
+            <TextBox x:Name="ContentBox" Grid.Row="1" Text="{Binding Content, UpdateSourceTrigger=PropertyChanged}" MaxLength="100000"
+                     AcceptsReturn="True" TextWrapping="Wrap" VerticalContentAlignment="Top" VerticalScrollBarVisibility="Auto"
+                     Padding="12" automation:AutomationProperties.Name="Snippet content" />
+          </Grid>
+
+          <Grid Grid.Row="3" Margin="0,16,0,0">
+            <Grid.ColumnDefinitions><ColumnDefinition /><ColumnDefinition Width="Auto" /></Grid.ColumnDefinitions>
+            <TextBlock x:Name="UpdatedText" VerticalAlignment="Center" Foreground="{DynamicResource MutedTextBrush}" FontSize="12" />
+            <Button Grid.Column="1" Content="Delete snippet" Style="{StaticResource DangerButton}" Click="DeleteSnippet_Click"
+                    automation:AutomationProperties.Name="Delete selected snippet" />
+          </Grid>
+        </Grid>
+      </Grid>
+    </Grid>
+  </Grid>
+</Window>

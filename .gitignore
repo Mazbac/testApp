@@ -21,3 +21,10 @@ coverage/
 .tmp/
 tmp/
 .cache/
+
+# .NET build output
+bin/
+obj/
+artifacts/
+dist/
+*.user

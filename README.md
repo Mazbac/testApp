@@ -1,28 +1,27 @@
-# Autonomous ChatGPT Project Template
+# QuickShelf
 
-A stack-neutral source-of-truth repository for building software with normal ChatGPT + GitHub + Desktop Commander, with the user acting as product owner rather than technical intermediary.
+QuickShelf is a small local Windows snippet manager built as the first end-to-end trial of this repository's autonomous delivery contract.
 
-## Core guarantee target
-The template is designed for **session invariance**: a replacement ChatGPT session should reconstruct substantially the same durable product meaning and next engineering priority from the repository and current evidence without needing the previous transcript.
+## v0.1 scope
+- Create, edit, favorite, search and delete short snippets.
+- Autosave to versioned local JSON with atomic writes and corruption recovery.
+- System, Light and Dark appearance preferences.
+- JSON backup/export, validated import/restore and explicit destructive reset.
+- Self-contained Windows 11 x64 installer; no account, cloud service, telemetry or separate .NET runtime.
+- Uninstall removes the app but preserves user-authored snippets for reinstall.
 
-## What this template provides
-- Durable project memory, deterministic resume and context-reconciliation rules.
-- Product discovery from raw natural-language intent, including incomplete brand/design input.
-- Architecture and decision records before irreversible complexity.
-- Professional Product Experience requirements across first use, daily use, recovery and applicable install/update/uninstall lifecycle.
-- Product-design methodology with reference-class/platform research, project design systems, tokens and component strategy without forcing one UI library.
-- Secure-development requirements and explicit threat modelling.
-- Risk-based unit/integration/E2E/security/accessibility/visual/golden-journey testing.
-- Schema-driven machine manifest, lifecycle/context-integrity gates and adversarial template canaries.
-- Git/PR/CI quality gates, reproducible release/recovery rules and a hard Definition of Done.
+User data is stored under `%LOCALAPPDATA%\QuickShelf`. The installed app lives under `%LOCALAPPDATA%\Programs\QuickShelf`.
 
-## Start
-Read `START_HERE.md`, then `AGENTS.md`. On a local clone, ChatGPT activates repository hooks with `.automation/bootstrap.mjs`, then runs the doctor, validator and context-integrity gate before changing project state.
+## Development
+Prerequisites: Git, Node.js 24, .NET SDK 10.0.400 and PowerShell. NSIS 3.12 is required only to build the installer.
 
-## Design philosophy
-The template owns the design process; each project owns its design language. Reuse proven interaction behavior, own the product design, respect platform conventions and treat setup/error/update/uninstall experience as part of release quality.
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File tools/bootstrap.ps1
+powershell -NoProfile -ExecutionPolicy Bypass -File scripts/verify.ps1
+powershell -NoProfile -ExecutionPolicy Bypass -File scripts/build.ps1
+```
 
-## Git safety
-This private repository's current GitHub plan does not expose server-side rulesets or classic branch protection. A versioned pre-push hook blocks accidental local direct pushes to `main`/`master`; PR + green independent CI remains mandatory policy. Enable server-side protection when available.
+`AGENTS.md`, `.project/manifest.json` and the repository operating documents remain the source of truth for project state and release rules.
 
-The stack never chooses the product. Technology, component libraries and distribution mechanisms are selected after product constraints are understood.
+## Release posture
+v0.1 is still in verification until the protected-branch PR and independent GitHub Actions gates are green. The test release is unsigned unless a real code-signing identity is later authorized, so Windows may report an unknown publisher or apply SmartScreen reputation checks.
