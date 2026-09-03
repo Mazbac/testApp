@@ -23,5 +23,9 @@ powershell -NoProfile -ExecutionPolicy Bypass -File scripts/build.ps1
 
 `AGENTS.md`, `.project/manifest.json` and the repository operating documents remain the source of truth for project state and release rules.
 
-## Release posture
-v0.1 is still in verification until the protected-branch PR and independent GitHub Actions gates are green. The test release is unsigned unless a real code-signing identity is later authorized, so Windows may report an unknown publisher or apply SmartScreen reputation checks.
+## Release
+QuickShelf v0.1.0 is released at `https://github.com/Mazbac/testApp/releases/tag/v0.1.0` from source revision `02f57d48c5c3ab82c40edca4ac23bed04e23e081`.
+
+Installer SHA-256: `3968e7880a6bbeea9fdecee880cf75a872deab7ac8ea6e90a6f9e5c6c6389f1c`.
+
+The v0.1.0 test release is unsigned because no authorized code-signing identity is available. Windows may report an unknown publisher or apply SmartScreen reputation checks; QuickShelf does not claim a verified publisher identity.

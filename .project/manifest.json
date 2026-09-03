@@ -2,7 +2,7 @@
   "$schema": "./manifest.schema.json",
   "schemaVersion": 2,
   "mode": "project",
-  "lifecycle": "VERIFY",
+  "lifecycle": "RELEASED",
   "project": {
     "name": "QuickShelf",
     "summary": "A lightweight local Windows scratchpad for creating, finding, favoriting, backing up, and restoring short text notes.",

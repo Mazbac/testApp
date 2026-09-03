@@ -1,33 +1,31 @@
 # QuickShelf Delivery Plan
 
-## DISCOVER / DEFINE / DESIGN
+## v0.1.0 — RELEASED
 - [x] Bound v0.1 to a small local snippet manager that exercises the full Windows app lifecycle.
-- [x] Choose .NET 10 WPF, versioned local JSON storage and NSIS packaging.
-- [x] Define data ownership, recovery, uninstall behavior, golden journeys and non-goals.
-- [x] Establish Windows-native design direction, tokens/component strategy and accessibility target.
+- [x] Define product, architecture, data ownership, recovery, security boundaries, design system and non-goals.
+- [x] Implement snippets, search, favorites, autosave, recovery, System/Light/Dark themes, export/import and destructive reset.
+- [x] Add unit/integration tests, semantic Windows UI Automation E2E, security scanning and adversarial repository canaries.
+- [x] Build a self-contained per-user NSIS installer with Start Menu integration and data-preserving uninstall.
+- [x] Exercise all five manifest golden journeys and inspect representative Light/Dark final surfaces.
+- [x] Protect `main` server-side and require `template-integrity` + `quality` through pull requests.
+- [x] Fix reproducibility defects discovered by independent CI without weakening gates.
+- [x] Merge PR #1 and prove the merge tree matches the reviewed candidate tree.
+- [x] Rebuild/retest exact release source `02f57d48c5c3ab82c40edca4ac23bed04e23e081`.
+- [x] Pass exact-source main CI runs `33763069424` and `33763069524`.
+- [x] Publish GitHub Release `v0.1.0` with installer and checksum.
 
-## BUILD
-- [x] Implement versioned state model, atomic persistence, corruption recovery and search.
-- [x] Implement two-pane snippet UI with create/edit/favorite/search/delete and deliberate empty/error states.
-- [x] Implement System/Light/Dark theme preference with local-culture formatting and high-contrast fallback.
-- [x] Implement export, import and destructive reset with validation/confirmation/feedback.
-- [x] Add unit/integration tests, security scanning and deterministic aggregate verification.
-- [x] Add NSIS per-user installer with Start Menu integration and data-preserving uninstall.
-- [x] Add project CI with repository/context gates, build, test and vulnerability review.
+## Release artifact
+- Installer: `QuickShelf-Setup-0.1.0.exe`
+- SHA-256: `3968e7880a6bbeea9fdecee880cf75a872deab7ac8ea6e90a6f9e5c6c6389f1c`
+- Release: `https://github.com/Mazbac/testApp/releases/tag/v0.1.0`
+- Trust limitation: unsigned test release; no verified publisher identity is claimed.
 
-## VERIFY
-- [x] Pass restore/format/build/test/security/context gates locally.
-- [x] Exercise all five manifest golden journeys through the real product surface.
-- [x] Inspect keyboard/UI Automation semantics, focus treatment, contrast and representative dark/light screenshots.
-- [x] Verify final local installer install/use/uninstall/reinstall and preserved user data.
-- [x] Reconcile implementation, manifest, architecture, design, risks and current status.
+## v0.2 — next template stress test
+- [ ] Define a small user-visible field that requires schema v1 -> v2 migration without inflating product scope.
+- [ ] Create a pre-migration backup and explicit migration/rollback contract before changing persisted state.
+- [ ] Add migration regression tests using real v0.1 state fixtures.
+- [ ] Build v0.2 and verify install-over upgrade preserves every supported v0.1 datum.
+- [ ] Verify failed/unsupported migration does not silently destroy or overwrite recoverable v0.1 data.
+- [ ] Repeat protected PR, independent CI, exact-revision installer lifecycle and release evidence.
 
-## RELEASE â€” current
-- [x] Prepare and locally verify the complete candidate revision on `feat/quickshelf-v0.1`.
-- [ ] Push the candidate, open PR, obtain required `template-integrity` and `quality` checks, and review the exact diff/security/product maturity.
-- [ ] Merge through protected `main` only after required gates are green.
-- [ ] Rebuild/retest the exact merged revision, create v0.1.0 release notes and publish the installer/checksum as GitHub Release assets.
-- [ ] Record exact release revision/run/artifact evidence and advance lifecycle to RELEASED.
-
-## Follow-on template stress test
-- [ ] v0.2: add a deliberate state-schema migration and prove install-over upgrade + rollback handling.
+No v0.2 implementation has started. v0.1.0 remains the stable released baseline.
