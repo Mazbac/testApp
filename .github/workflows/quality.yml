@@ -35,4 +35,4 @@ jobs:
         run: node .automation/context-integrity.mjs
       - name: Verify product
         shell: pwsh
-        run: ./scripts/verify.ps1 -SkipRestore -SkipE2E
+        run: ./scripts/verify.ps1 -SkipE2E
