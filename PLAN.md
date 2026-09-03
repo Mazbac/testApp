@@ -1,32 +1,33 @@
-# Delivery Plan
+# QuickShelf Delivery Plan
 
-## Template foundation v1
-- [x] Establish autonomous operating contract, project manifest, secure SDLC, design/security/testing/release standards.
-- [x] Add local bootstrap/doctor, repository validator, pinned CI and direct-default-branch guard.
-- [x] Prove foundation with positive/negative canaries and independent GitHub Actions.
+## DISCOVER / DEFINE / DESIGN
+- [x] Bound v0.1 to a small local snippet manager that exercises the full Windows app lifecycle.
+- [x] Choose .NET 10 WPF, versioned local JSON storage and NSIS packaging.
+- [x] Define data ownership, recovery, uninstall behavior, golden journeys and non-goals.
+- [x] Establish Windows-native design direction, tokens/component strategy and accessibility target.
 
-## Template foundation v2 — session-invariant professional delivery
-- [x] Define session invariance, context precedence, durable-input classification and decision supersession.
-- [x] Add Professional Product Experience Standard and full applicable user-lifecycle expectations.
-- [x] Expand product-design standard with reference-class research, brand translation, platform fit and component strategy.
-- [x] Add deterministic project design-system template and manifest-referenced design/token sources.
-- [x] Upgrade machine manifest/schema to v2 with context, design and product-experience state.
-- [x] Add schema-driven validation and context-integrity automation.
-- [x] Require derived project CI to execute repository/context gates.
-- [x] Add positive baseline plus six adversarial canaries for schema, CI, context and UI-design failures.
-- [x] Align discovery, activation, SDLC, testing, DoD, release/recovery, risks and PR review contract.
-- [x] Pass doctor, validator, context-integrity, syntax/JSON/diff checks and local self-tests.
-- [x] Pass independent implementation PR CI and squash-merge PR #3.
-- [x] Pass post-merge GitHub Actions on `main` revision `26951f5b25759ad96bcf5d6c789acf6aaff9badd`.
-- [x] Finalize durable `STATUS.md` / `PLAN.md` READY state through the same PR + CI policy.
+## BUILD
+- [x] Implement versioned state model, atomic persistence, corruption recovery and search.
+- [x] Implement two-pane snippet UI with create/edit/favorite/search/delete and deliberate empty/error states.
+- [x] Implement System/Light/Dark theme preference with local-culture formatting and high-contrast fallback.
+- [x] Implement export, import and destructive reset with validation/confirmation/feedback.
+- [x] Add unit/integration tests, security scanning and deterministic aggregate verification.
+- [x] Add NSIS per-user installer with Start Menu integration and data-preserving uninstall.
+- [x] Add project CI with repository/context gates, build, test and vulnerability review.
 
-## Derived-project flow
-1. DISCOVER: raw intent -> users, problem, experience, constraints, first useful release and durable brand/design signals.
-2. DEFINE: architecture, data/trust boundaries, dependencies, distribution/lifecycle model and threat model.
-3. DESIGN: golden journeys, reference class, platform conventions, project design system/tokens/components and accessibility.
-4. BUILD: vertical slices with tests, observability, security, product-experience completeness and durable context updates.
-5. VERIFY: functional, security, context-integrity, visual/accessibility, maturity, golden-journey and clean lifecycle checks.
-6. RELEASE: reproducible artifact/distribution, migration/rollback, lifecycle smoke tests and current independent CI evidence.
-7. OPERATE: controlled defects, security/dependency changes, product evolution and durable decision/context maintenance.
+## VERIFY
+- [x] Pass restore/format/build/test/security/context gates locally.
+- [x] Exercise all five manifest golden journeys through the real product surface.
+- [x] Inspect keyboard/UI Automation semantics, focus treatment, contrast and representative dark/light screenshots.
+- [x] Verify final local installer install/use/uninstall/reinstall and preserved user data.
+- [x] Reconcile implementation, manifest, architecture, design, risks and current status.
 
-Foundation v2 is complete. Future work belongs to derived product repositories or intentional template maintenance.
+## RELEASE â€” current
+- [x] Prepare and locally verify the complete candidate revision on `feat/quickshelf-v0.1`.
+- [ ] Push the candidate, open PR, obtain required `template-integrity` and `quality` checks, and review the exact diff/security/product maturity.
+- [ ] Merge through protected `main` only after required gates are green.
+- [ ] Rebuild/retest the exact merged revision, create v0.1.0 release notes and publish the installer/checksum as GitHub Release assets.
+- [ ] Record exact release revision/run/artifact evidence and advance lifecycle to RELEASED.
+
+## Follow-on template stress test
+- [ ] v0.2: add a deliberate state-schema migration and prove install-over upgrade + rollback handling.

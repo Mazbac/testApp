@@ -52,11 +52,13 @@ expectFailure('unpinned-action', (dir) => {
   fs.writeFileSync(file, text);
 }, 'action is not pinned to a full commit SHA');
 
+const baselineLifecycle = JSON.parse(fs.readFileSync(path.join(root, '.project', 'manifest.json'), 'utf8')).lifecycle;
 expectFailure('status-drift', (dir) => {
   const file = path.join(dir, 'STATUS.md');
-  const text = fs.readFileSync(file, 'utf8').replace('- Lifecycle: TEMPLATE', '- Lifecycle: BUILD');
+  const wrongLifecycle = baselineLifecycle === 'BUILD' ? 'VERIFY' : 'BUILD';
+  const text = fs.readFileSync(file, 'utf8').replace(/- Lifecycle: [A-Z_]+/, `- Lifecycle: ${wrongLifecycle}`);
   fs.writeFileSync(file, text);
-}, 'STATUS.md lifecycle must match manifest lifecycle TEMPLATE', 'context-integrity.mjs');
+}, `STATUS.md lifecycle must match manifest lifecycle ${baselineLifecycle}`, 'context-integrity.mjs');
 
 expectFailure('missing-ui-design-source', (dir) => {
   const manifestFile = path.join(dir, '.project', 'manifest.json');
@@ -72,7 +74,7 @@ expectFailure('missing-ui-design-source', (dir) => {
     platform: 'windows',
     devUrl: null,
     playwright: false,
-    designSystem: 'DESIGN_SYSTEM.md',
+    designSystem: 'canary/missing-design-system.md',
     designTokens: 'src/design-tokens.json',
     componentStrategy: 'product-components-over-proven-primitives',
     accessibilityTarget: 'platform accessibility requirements',
@@ -94,7 +96,7 @@ expectFailure('missing-ui-design-source', (dir) => {
   fs.writeFileSync(path.join(dir, 'ARCHITECTURE.md'), '# Architecture Record\n\nConcrete canary architecture.\n');
   fs.writeFileSync(path.join(dir, 'STATUS.md'), '# Current State\n\n- Lifecycle: DESIGN\n');
   fs.writeFileSync(path.join(dir, '.github', 'workflows', 'quality.yml'), 'name: Quality\non: [push]\njobs: {}\n');
-}, 'UI design source does not exist: DESIGN_SYSTEM.md', 'context-integrity.mjs');
+}, 'UI design source does not exist: canary/missing-design-system.md', 'context-integrity.mjs');
 
 
 expectFailure('unsupported-schema-keyword', (dir) => {

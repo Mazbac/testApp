@@ -1,37 +1,29 @@
-# Project Definition
+# QuickShelf — Project Definition
 
 ## Status
-Template state. Replace this document during discovery for each derived project.
+Activated Windows desktop project. First useful release: v0.1.0.
 
 ## Product intent
-- Problem: UNSET
-- Primary user: UNSET
-- Desired outcome: UNSET
-- First useful release: UNSET
-- Explicit non-goals: UNSET
+- Problem: people need a fast private place for short notes/snippets without accounts or cloud setup.
+- Primary user: ordinary Windows users who want lightweight local scratch storage.
+- Desired outcome: capture, find, edit, favorite, export and recover snippets with near-zero setup.
+- First useful release: installable Windows 11 x64 app with local persistence and a complete lifecycle.
+- Explicit non-goals: accounts, cloud sync, collaboration, rich text, plugins, mobile/web clients and telemetry.
 
 ## Product experience
-- Target audience / expertise: UNSET
-- First useful outcome: UNSET
-- Distribution/install expectations: UNSET
-- Setup/onboarding constraints: UNSET
-- Update/recovery/uninstall expectations: UNSET
+- Audience: non-technical consumer; implementation details stay hidden.
+- First value: install, launch, create a snippet, close/reopen and see it preserved.
+- Distribution: versioned self-contained Windows installer; no separate .NET runtime required.
+- Onboarding: no wizard; an empty-state prompt and obvious New snippet action are sufficient.
+- Updates: v0.1 supports install-over upgrade; no background updater.
+- Recovery: atomic writes + backup; corrupt data is quarantined rather than overwritten.
+- Uninstall: removes app binaries/shortcuts but preserves user data; in-app Reset deletes data explicitly.
 
 ## Brand / creative input
-- Existing brand/assets: UNSET
-- Colors/typography/tone: UNSET
-- User references/inspiration: UNSET
-- Explicit durable likes/dislikes: UNSET
-
-These inputs may be incomplete or absent. ChatGPT derives ordinary product/design decisions rather than requiring the user to write a professional brief.
-
-## Constraints
-- User communicates requirements in natural language and is not a technical intermediary.
-- Prefer no paid service or vendor lock-in unless the product explicitly requires it and the user accepts it.
-- Security, reliability, maintainability, professional design and professional product experience are release requirements, not polish tasks.
-- Hide implementation complexity from ordinary users when the product can reasonably absorb it.
-- Automate reproducible work instead of depending on undocumented local or conversational state.
-- Preserve session invariance by persisting durable product meaning in the repository.
+- Product name: QuickShelf.
+- Character: calm, native, compact, trustworthy; Windows Fluent-inspired rather than web-dashboard-like.
+- Typography: Segoe UI/system typography.
+- Durable preference: keep the app small and the development/release path broad enough to test this repository.
 
 ## Acceptance
-A release is accepted only when the user-facing outcome, applicable golden journeys and `docs/DEFINITION_OF_DONE.md` are satisfied with evidence.
+Release only when install/launch/use/restart/export-reset-import/theme/uninstall-reinstall journeys work through the real product surface and repository Definition of Done is satisfied.
